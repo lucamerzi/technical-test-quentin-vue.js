@@ -1,4 +1,4 @@
-# todo
+# Playing around with vue.js
 
 ## Project setup
 ```
