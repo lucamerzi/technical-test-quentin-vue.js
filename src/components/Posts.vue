@@ -41,17 +41,17 @@
         <thead>
           <tr>
             <th scope="col">Id</th>
+            <th scope="col">userId</th>
             <th scope="col">title</th>
-            <th scope="col">body</th>
-            <th scope="col">Handle</th>
+            <th scope="col">completed</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="post in posts" :key="post.id">
-            <th scope="row">{{post.id}}</th>
-            <td>{{post.name}}</td>
-            <td></td>
-            <td></td>
+          <tr v-for="todo in todos" :key="todo.id">
+            <th scope="row">{{todo.id}}</th>
+            <td>{{todo.userId}}</td>
+            <td>{{todo.title}}</td>
+            <td>{{todo.completed}}</td>
           </tr>
         </tbody>
       </table>
@@ -60,17 +60,18 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "PostsExample",
   data() {
     return {
-      posts: [
-        { id: 1, name: "Luca", post: "ciao" },
-        { id: 2, name: "Ale", post: "come" },
-        { id: 3, name: "Ad", post: "stai" },
-        { id: 4, name: "Ren", post: "?" }
-      ]
+      todos: []
     };
+  },
+
+  async created() {
+    const todos = await axios.get("https://jsonplaceholder.typicode.com/todos");
+    this.todos = todos.data;
   }
 };
 </script>
