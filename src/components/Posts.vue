@@ -57,7 +57,7 @@
               </button>
             </td>
             <td>
-              <button class="btn btn-warning btn-sm">
+              <button @click="edit(todo.id)" class="btn btn-warning btn-sm">
                 <i class="fas fa-pencil-alt"></i>
               </button>
             </td>
@@ -86,6 +86,9 @@ export default {
   methods: {
     onDelete(id) {
       this.$store.dispatch("removeTodo", id);
+    },
+    edit(todo) {
+      this.$store.dispatch("editTodo", todo);
     }
   }
 };

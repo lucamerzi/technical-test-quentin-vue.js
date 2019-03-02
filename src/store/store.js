@@ -20,11 +20,12 @@ const store = new Vuex.Store({
       state.newTodo = currentTodo
     },
     ADD_TODO(state, response) {
-      state.todos.push(response)
+      state.todos.unshift(response)
     },
     CLEAR_TODO(state) {
       state.newTodo = ''
-    }
+    },
+
   },
 
   // We can perform asynchronous operations inside an action:
@@ -48,10 +49,7 @@ const store = new Vuex.Store({
     },
 
     addTodo(store) {
-      console.log(store);
       const newTodo = store.state.newTodo;
-      console.log(newTodo);
-
 
       // POST adds a random id to the object sent
       fetch('https://jsonplaceholder.typicode.com/todos', {
@@ -72,6 +70,10 @@ const store = new Vuex.Store({
 
     clearTodo(store) {
       store.commit("CLEAR_TODO")
+    },
+
+    editTodo(store, todoId) {
+      console.log("edit action", todoId);
     }
 
   },
