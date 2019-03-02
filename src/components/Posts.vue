@@ -47,7 +47,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="todo in todos" :key="todo.id">
+          <tr v-for="todo in todosRetrievedFromStore" :key="todo.id">
             <th scope="row">{{todo.id}}</th>
             <td>{{todo.userId}}</td>
             <td>{{todo.title}}</td>
@@ -60,18 +60,18 @@
 </template>
 
 <script>
-import axios from "axios";
+import store from "../store/store.js";
 export default {
   name: "PostsExample",
-  data() {
-    return {
-      todos: []
-    };
+
+  computed: {
+    todosRetrievedFromStore() {
+      return store.state.todos;
+    }
   },
 
   async created() {
-    const todos = await axios.get("https://jsonplaceholder.typicode.com/todos");
-    this.todos = todos.data;
+    this.$store.dispatch("fetchTodos", { self: this });
   }
 };
 </script>
