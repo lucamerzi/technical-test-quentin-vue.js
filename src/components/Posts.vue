@@ -34,9 +34,7 @@
       </div>
     </nav>
     <div class="container">
-      <h1>This is my template</h1>
-
-      <button class="btn btn-primary">CLICK</button>
+      <h1>This is my Vue.js todo</h1>
       <table class="table mt-4">
         <thead>
           <tr>
@@ -54,11 +52,14 @@
             <td>{{todo.title}}</td>
 
             <td>
-              <button v-on:click="onDelete(todo.id)" class="btn btn-danger btn-sm">dlt</button>
+              <button v-on:click="onDelete(todo.id)" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash-alt"></i>
+              </button>
             </td>
             <td>
-              <button class="btn btn-warning btn-sm">dlt</button>
-              {{todo.id}}
+              <button class="btn btn-warning btn-sm">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
             </td>
           </tr>
         </tbody>

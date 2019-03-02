@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    <posts-example/>
+    <Input/>
+    <PostsExample/>
   </div>
 </template>
 
 <script>
 import PostsExample from "./components/Posts.vue";
+import Input from "./components/Input";
 export default {
   name: "app",
   components: {
+    Input,
     PostsExample
   }
 };
