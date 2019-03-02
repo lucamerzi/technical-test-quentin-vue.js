@@ -1,6 +1,6 @@
 <template>
-  <div id="get-todo" class="container">
-    <input class="form-control" :value="newTodo" @change="getTodo" placeholder="I need to...">
+  <div id="get-todo" class="container mt-5">
+    <input class="form-control mb-3" :value="newTodo" @change="getTodo" placeholder="I need to...">
     <button class="btn btn-primary" @click="addTodo">Add Todo</button>
   </div>
 </template>

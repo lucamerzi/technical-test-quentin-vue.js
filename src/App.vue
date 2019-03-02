@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <Navbar/>
+    <h1>This is my Vue.js todo</h1>
+
     <Input/>
     <PostsExample/>
   </div>
@@ -8,9 +11,11 @@
 <script>
 import PostsExample from "./components/Posts.vue";
 import Input from "./components/Input";
+import Navbar from "./components/Navbar";
 export default {
   name: "app",
   components: {
+    Navbar,
     Input,
     PostsExample
   }
