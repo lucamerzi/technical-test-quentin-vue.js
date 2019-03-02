@@ -40,10 +40,11 @@
       <table class="table mt-4">
         <thead>
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col">userId</th>
-            <th scope="col">title</th>
-            <th scope="col">completed</th>
+            <th scope="col">Todo Id</th>
+            <th scope="col">User Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
           </tr>
         </thead>
         <tbody>
@@ -51,7 +52,14 @@
             <th scope="row">{{todo.id}}</th>
             <td>{{todo.userId}}</td>
             <td>{{todo.title}}</td>
-            <td>{{todo.completed}}</td>
+
+            <td>
+              <button v-on:click="onDelete(todo.id)" class="btn btn-danger btn-sm">dlt</button>
+            </td>
+            <td>
+              <button class="btn btn-warning btn-sm">dlt</button>
+              {{todo.id}}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -64,14 +72,20 @@ import store from "../store/store.js";
 export default {
   name: "PostsExample",
 
+  async created() {
+    this.$store.dispatch("fetchTodos", { self: this });
+  },
+
   computed: {
     todosRetrievedFromStore() {
       return store.state.todos;
     }
   },
 
-  async created() {
-    this.$store.dispatch("fetchTodos", { self: this });
+  methods: {
+    onDelete(id) {
+      this.$store.dispatch("removeTodo", id);
+    }
   }
 };
 </script>
