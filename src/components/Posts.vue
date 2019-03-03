@@ -17,11 +17,11 @@
           <td>{{todo.userId}}</td>
           <td>
             <p v-if="todo.id != editTodoId">{{todo.title}}</p>
-            <textarea v-else v-model="updateTodo.title"></textarea>
+            <textarea class="form-control" v-else v-model="updateTodo.title"></textarea>
           </td>
           <td>
             <p v-if="todo.id != editTodoId">{{todo.body}}</p>
-            <textarea v-else v-model="updateTodo.body"></textarea>
+            <textarea class="form-control" v-else v-model="updateTodo.body"></textarea>
           </td>
           <td>
             <button v-on:click="onDelete(todo.id)" class="btn btn-danger btn-sm">
@@ -76,9 +76,6 @@ export default {
         body: "",
         title: ""
       };
-    },
-    onChange() {
-      console.log("it works");
     }
   },
   data() {
@@ -95,5 +92,6 @@ export default {
 <style scoped>
 textarea {
   width: 100%;
+  height: 200px;
 }
 </style>

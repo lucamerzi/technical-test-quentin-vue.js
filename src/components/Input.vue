@@ -1,25 +1,43 @@
 <template>
-  <div id="get-todo" class="container mt-5">
-    <input class="form-control mb-3" :value="newTodo" @change="getTodo" placeholder="I need to...">
-    <button class="btn btn-primary" @click="addTodo">Add Todo</button>
-  </div>
+  <form v-on:submit.prevent="addTodo" id="get-todo" class="container mt-5">
+    <input
+      name="title"
+      @change="syncLocalState"
+      class="form-control mb-3"
+      placeholder="My new todo's title..."
+    >
+    <textarea
+      name="body"
+      @change="syncLocalState"
+      class="form-control mb-3"
+      placeholder="My new todo's body..."
+    ></textarea>
+    <button class="btn btn-primary">Add Todo</button>
+  </form>
 </template>
 
 <script>
 export default {
   methods: {
-    getTodo(e) {
-      this.$store.dispatch("getTodo", e.target.value);
+    addTodo(e) {
+      e.target.reset();
+      this.$store.dispatch("addTodo", this.newTodo);
+      this.newTodo = {
+        title: "",
+        body: ""
+      };
     },
-    addTodo() {
-      this.$store.dispatch("addTodo");
-      this.$store.dispatch("clearTodo");
+    syncLocalState(e) {
+      this.newTodo[e.target.name] = e.target.value;
     }
   },
-  computed: {
-    newTodo() {
-      return this.$store.getters.newTodo;
-    }
+  data() {
+    return {
+      newTodo: {
+        title: "",
+        body: ""
+      }
+    };
   }
 };
 </script>
