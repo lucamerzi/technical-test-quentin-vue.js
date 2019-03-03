@@ -1,5 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import { unionBy } from "lodash";
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -15,6 +17,9 @@ const store = new Vuex.Store({
     },
     REMOVE_TODO(state, todoId) {
       state.todos = state.todos.filter(el => el.id !== todoId)
+    },
+    EDIT_TODO(state, todo) {
+      state.todos = unionBy([todo], state.todos, "id");
     },
     GET_TODO(state, currentTodo) {
       state.newTodo = currentTodo
@@ -72,8 +77,18 @@ const store = new Vuex.Store({
       store.commit("CLEAR_TODO")
     },
 
-    editTodo(store, todoId) {
-      console.log("edit action", todoId);
+    editTodo(store, todo) {
+      // POST adds a random id to the object sent
+      fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(todo),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      })
+        .then(response => response.json())
+        .then(json => { store.commit("EDIT_TODO", json); })
+        .catch((error => { alert("error addTodo !!!", error.statusText) }))
     }
 
   },

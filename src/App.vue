@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <Navbar/>
-    <h1>This is my Vue.js todo</h1>
-
+    <h1>Luca's todos</h1>
     <Input/>
     <PostsExample/>
   </div>
