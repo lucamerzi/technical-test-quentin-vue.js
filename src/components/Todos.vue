@@ -45,10 +45,10 @@
 <script>
 import store from "../store/store.js";
 export default {
-  name: "PostsExample",
+  name: "My-todos",
 
   async created() {
-    this.$store.dispatch("fetchTodos", { self: this });
+    this.$store.dispatch("fetchTodos" /*, { self: this } */);
   },
 
   computed: {
@@ -66,8 +66,6 @@ export default {
         body: todo.body,
         title: todo.title
       };
-
-      // this.$store.dispatch("editTodo", todo);
     },
     submit(todo) {
       this.$store.dispatch("editTodo", { ...todo, ...this.updateTodo });

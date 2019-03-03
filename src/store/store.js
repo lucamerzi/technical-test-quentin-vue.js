@@ -30,29 +30,25 @@ const store = new Vuex.Store({
 
   // We can perform asynchronous operations inside an action:
   actions: {
-    fetchTodos({ commit } /* { self } */) {
+    fetchTodos(store /*, { self } */) {
       fetch("https://jsonplaceholder.typicode.com/posts")
         .then(response => response.json())
         .then(json => {
-          commit("FETCH_TODOS", json);
+          store.commit("FETCH_TODOS", json);
         })
         .catch(error => {
-          alert("error fetchTodos !!!", error.statusText);
+          alert("Error in fetchTodos!", error.statusText);
         });
     },
 
-    removeTodo(store, id /* { self } */) {
+    removeTodo(store, id) {
       fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
         method: "DELETE"
       })
         .then(store.commit("REMOVE_TODO", id))
         .catch(error => {
-          alert("error removeTodo !!!", error.statusText);
+          alert("Error in removeTodo!", error.statusText);
         });
-    },
-
-    getTodo(store, userInput) {
-      store.commit("GET_TODO", userInput);
     },
 
     addTodo(store, newTodo) {
@@ -73,17 +69,18 @@ const store = new Vuex.Store({
         .then(json => {
           store.commit("ADD_TODO", {
             ...json,
-            // API always returns same ID, which is not optimal for vue
+            // API always returns same ID, which is not optimal for vue, so I'm adding some extra digits
             id: json.id + Math.floor(Math.random() * 1000)
           });
         })
         .catch(error => {
-          alert("error addTodo !!!", error.statusText);
+          alert("Error in addTodo!", error.statusText);
         });
     },
 
     editTodo(store, todo) {
       // POST adds a random id to the object sent
+      // The API will return an error if trying to edit todos that do not come from the API
       fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
         method: "PUT",
         body: JSON.stringify(todo),
@@ -96,15 +93,12 @@ const store = new Vuex.Store({
           store.commit("EDIT_TODO", json);
         })
         .catch(error => {
-          alert("error addTodo !!!", error.statusText);
+          alert("Error with editTodo!", error.statusText);
         });
     }
   },
   getters: {
-    doneTodos: state => {
-      return state.todos;
-    },
-    newTodo: state => state.newTodo
+    doneTodos: state => state.todos
   }
 });
 

@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: "ciao"
+  name: "My-navbar"
 };
 </script>

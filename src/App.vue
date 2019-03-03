@@ -3,12 +3,12 @@
     <Navbar/>
     <h1>Luca's todos</h1>
     <Input/>
-    <PostsExample/>
+    <Todos/>
   </div>
 </template>
 
 <script>
-import PostsExample from "./components/Posts.vue";
+import Todos from "./components/Todos.vue";
 import Input from "./components/Input";
 import Navbar from "./components/Navbar";
 export default {
@@ -16,7 +16,7 @@ export default {
   components: {
     Navbar,
     Input,
-    PostsExample
+    Todos
   }
 };
 </script>

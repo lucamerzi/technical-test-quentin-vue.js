@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  name: "My-input",
   methods: {
     addTodo(e) {
       e.target.reset();
